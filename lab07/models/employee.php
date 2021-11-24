@@ -19,7 +19,7 @@ class Employee{
         return $result;
     }
     public function getById($id) {
-        $sql = "select * from employees where (?)";
+        $sql = "select * from employees where id=(?)";
         $cmd = $this->conn->prepare($sql);
         $cmd->execute(array($id));
         $result = $cmd->fetchObject();

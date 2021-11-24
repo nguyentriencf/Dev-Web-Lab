@@ -16,7 +16,9 @@ class EmployeeController{
             case "detail":
                 $this->detail();
                 break;
-            // case insert:
+            case "insert":
+                $this->insert();
+                break;
                 
         }
     }
@@ -40,12 +42,21 @@ class EmployeeController{
     }
     public function insert()
     {
+        $name= $_POST['name'];
+        $surname= $_POST['surname'];
+        $email= $_POST['email'];
+        $phone= $_POST['phone'];
+        echo $surname;
+        $emp = new Employee($this->connection);
+        $emp->insert($name,$surname,$email,$phone);
         
     }
     public function view($path,$dt)
     {
         $data = $dt;
         require_once 'views/'.$path.'.php';
+        // $result = json_encode($dt,0);
+        // return $result;
     }
 }
 
