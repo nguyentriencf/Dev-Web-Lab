@@ -19,7 +19,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="">Phòng ban <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="inde">Phòng ban <span class="sr-only">(current)</span></a>
                 </li>
             </ul>
 
@@ -32,7 +32,7 @@
                 ID =
             </div>
             <div class="col-lg-8">
-                <?php echo $data["emp"]->id ?>
+                <?php echo $data["emp"]->idEmployee ?>
             </div>
         </div>
         <div class="row">
@@ -48,7 +48,31 @@
                 Surname =
             </div>
             <div class="col-lg-8">
-                <?php echo $data["emp"]->surName ?>
+                <?php echo $data["emp"]->surname ?>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                Phone =
+            </div>
+            <div class="col-lg-8">
+                <?php echo $data["emp"]->phone ?>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                email =
+            </div>
+            <div class="col-lg-8">
+                <?php echo $data["emp"]->email ?>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                Phòng ban =
+            </div>
+            <div class="col-lg-8">
+                <?php echo $data["emp"]->nameDepartment ?>
             </div>
         </div>
     </div>

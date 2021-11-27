@@ -15,7 +15,7 @@
 <body>
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Nhân viên</a>
+        <a class="navbar-brand" href="index.php">Nhân viên</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -23,7 +23,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Phòng ban <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="index.php?action=department">Phòng ban <span class="sr-only">(current)</span></a>
                 </li>
             </ul>
 
@@ -31,10 +31,10 @@
     </nav>
     <div class="container">
         <h2>Employee List</h2>
-        <p>Danh sách các User hiện có | Thêm mới</p>
+        <p>Danh sách các Nhân viên hiện có</p>
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#inSertMedal">
-            Thêm
+            Thêm mới
         </button>
 
         <!-- Modal -->
@@ -42,32 +42,20 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle">Thêm nhân viên</h5>
+                        <h5 class="modal-title" id="exampleModalLongTitle">Thêm phòng ban</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body">
+                    <div class="modal-body" action="index.php">
                         <form method="POST">
                             <div class="form-group">
-                                <label for="surname">Họ</label>
-                                <input type="text" class="form-control" id="surname" name="surname" placeholder="Nhập họ">
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Nhập tên phòng ban">
                             </div>
-                            <div class="form-group">
-                                <label for="name">Tên</label>
-                                <input type="text" class="form-control" id="name" name="name" placeholder="Nhập tên">
-                            </div>
-                            <div class="form-group">
-                                <label for="mail">Email</label>
-                                <input type="gmail" class="form-control" id="email" name="email" placeholder="Nhập gmail">
-                            </div>
-                            <div class="form-group">
-                                <label for="phone">Số điện thoại</label>
-                                <input type="number" class="form-control" id="phone" name="phone" placeholder="Nhập số điện thoại...">
-                            </div>
+
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                                <input id="insertEm" type="submit" name="addEm" value="Thêm" class="btn btn-primary" />
+                                <input id="insertDe" type="submit" name="addDep" value="Thêm" class="btn btn-primary" />
                             </div>
                         </form>
                     </div>
@@ -79,12 +67,7 @@
             <thead>
                 <tr>
                     <th>Id</th>
-                    <th>Firstname</th>
-                    <th>Surname</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th>Detail</th>
-                    <th>function</th>
+                    <th>Bộ phận</th>
                 </tr>
             </thead>
             <tbody>
@@ -92,54 +75,41 @@
                 foreach ($data["ListEmp"] as $List) {
                 ?>
                     <tr>
-                        <td><?php echo $List["id"] ?></td>
+                        <td><?php echo $List["idDepartment"] ?></td>
                         <td><?php echo $List["name"] ?></td>
-                        <td><?php echo $List["surName"] ?></td>
-                        <td><?php echo $List["email"] ?></td>
-                        <td><?php echo $List["phone"] ?></td>
                         <td>
-                            <a href="index.php?action=detail&id=<?php echo $List["id"] ?>">Detail</a>
-                        </td>
-                        <td>
-                            <button type=" button" class="btn btn-info">SỬa</button>
-                            <button type="button" class="btn btn-danger">Xoá</button>
+                            <a class="btn btn-info" href="index.php?action=updatepageDepartment&id=<?php echo $List["idDepartment"] ?>">Sửa</a>
+                            <a href="index.php?action=deleteDepartment&id=<?php echo $List["idDepartment"] ?>" class="btn btn-danger">Xoá</a>
                         </td>
                     </tr>
                 <?php
                 }
                 ?>
-
             </tbody>
         </table>
+
     </div>
 </body>
 
 </html>
 
-<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
 <script>
     $(document).ready(() => {
-        $("#insertEm").on('click', () => {
-            var surname = $('#surname').val();
+        $("#insertDe").on('click', (id) => {
+            console.log(id);
             var name = $('#name').val();
-            var phone = $('#phone').val();
-            var email = $('#email').val();
             $.ajax({
                 url: "index.php",
                 type: "POST",
                 data: {
-                    name: name,
-                    surname: surname,
-                    phone: phone,
-                    email: email
+                    name: name
                 },
                 cache: false,
                 success: (data) => {
-                    alert('success')
-                    window.location.href = 'http://localhost/Dev-Web-Lab/lab07/index.php';
+                    alert('thêm thành công');
                 }
             })
-
         })
+
     })
 </script>

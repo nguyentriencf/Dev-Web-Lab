@@ -1,17 +1,14 @@
 <?php
-class Employee{
+class Department{
     private $conn;
     public $id;
     public $name;
-    public $surName;
-    public $email;
-    public $phone;
     public function __construct($connection)
     {
         $this->conn = $connection;
     }
     public function getAll(){
-        $sql = "select * from employees";
+        $sql = "select * from departments";
         $cmd = $this->conn->prepare($sql);
         $cmd->execute();
         $result = $cmd->fetchAll();
@@ -19,27 +16,27 @@ class Employee{
         return $result;
     }
     public function getById($id) {
-        $sql = "select * from employeeViews where idEmployee=(?)";
+        $sql = "select * from departments where idDepartment=(?)";
         $cmd = $this->conn->prepare($sql);
         $cmd->execute(array($id));
         $result = $cmd->fetchObject();
         $this->conn = null;
         return $result;
     }
-    public function insert($name, $surname, $email, $phone,$idDep){
-        $sql = "call addEmployee_Proc(?,?,?,?,?)";
+    public function insert($name){
+        $sql = "call insert_Department_Proc(?)";
         $cmd = $this->conn->prepare($sql);
-        $cmd->execute(array($name, $surname, $email, $phone, $idDep));
+        $cmd->execute(array($name));
         $this->conn = null;
     }
-    public function update($id,$name,$surname,$email,$phone,$idD) {
-        $sql = "call updateEmployee_Proc(?,?,?,?,?,?)";
+    public function update($id,$name) {
+        $sql = "call update_Department_Proc(?,?)";
         $cmd = $this->conn->prepare($sql);
-        $cmd->execute(array($id, $name, $surname, $email, $phone, $idD));
+        $cmd->execute(array($id,$name));
         $this->conn = null;
     }
     public function delete($id){
-        $sql = "delete from employees where idEmployee = (?)";
+        $sql = "delete from departments where idDepartment = (?)";
         $cmd = $this->conn->prepare($sql);
         $cmd->execute(array($id));
         $this->conn = null;
@@ -47,4 +44,3 @@ class Employee{
     }
 
 }
-?>
